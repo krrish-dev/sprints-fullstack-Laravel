@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -20,9 +17,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone', // Add the 'phone' column
-        'address', // Add the 'address' column
-        'role', // Add the 'role' column
+        'phone', // Added the 'phone' column
+        'address', // Added the 'address' column
+        'role', // Added the 'role' column
         'remember_token',
     ];
 
@@ -47,12 +44,24 @@ class User extends Authenticatable
     ];
 
     /**
-     * Define a one-to-many relationship with the Cart model.
+     * Define a one-to-one relationship with the Cart model.
      */
-    public function carts()
+    //     public function hasCart()
+    // {
+    //     return $this->cart !== null;
+    // }
+    public function hasCart()
     {
-        return $this->hasMany(Cart::class);
+        return $this->cart()->exists();
     }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+
+
 
     /**
      * Define a one-to-many relationship with the Order model.

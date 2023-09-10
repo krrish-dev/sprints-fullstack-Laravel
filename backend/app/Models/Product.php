@@ -21,7 +21,7 @@ class Product extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'product_id'; // Update to match the primary key name in your database.
 
     /**
      * The attributes that are mass assignable.
@@ -68,5 +68,22 @@ class Product extends Model
     public function setPriceAttribute($value)
     {
         $this->attributes['price'] = number_format($value, 2);
+    }
+
+    /**
+     * Define a many-to-many relationship with the Cart model through the cart_items pivot table.
+     */
+    // public function carts()
+    // {
+    //     return $this->belongsToMany(Cart::class, 'cart_items')
+    //         ->withPivot(['quantity']);
+    // }
+
+    /**
+     * Define a one-to-many relationship with the OrderItem model.
+     */
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

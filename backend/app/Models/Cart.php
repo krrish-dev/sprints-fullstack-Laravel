@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+// use App\Models\Product;
 class Cart extends Model
 {
     use HasFactory;
@@ -21,7 +21,7 @@ class Cart extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'cart_id';
 
     /**
      * The attributes that are mass assignable.
@@ -29,24 +29,29 @@ class Cart extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'product_id',
-        'quantity',
+        'user_id', // Add 'user_id' to the fillable array
+        'created_at',
     ];
 
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class, 'cart_id');
+    }
+
     /**
-     * Define a many-to-one relationship with the User model.
+     * Define a many-to-many relationship with the Product model.
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'cart_items')
+        ->withTimestamps();
+    }
+
+    /**
+     * Define a one-to-one relationship with the User model.
      */
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Define a many-to-one relationship with the Product model.
-     */
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
     }
 }

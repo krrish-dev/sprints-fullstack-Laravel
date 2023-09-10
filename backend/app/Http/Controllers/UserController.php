@@ -1,14 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Cart; // Don't forget to import the Cart model
 
 class UserController extends Controller
 {
-
-
     // User registration
     public function register(Request $request)
     {
@@ -40,6 +40,13 @@ class UserController extends Controller
         }
 
         $user = $request->user();
+
+        // Check if the user has a cart; if not, create one
+        if (!$user->hasCart()) {
+            $cart = new Cart();
+            $user->cart()->save($cart);
+        }
+
         $token = $user->createToken('authToken')->plainTextToken;
 
         return response(['user' => $user, 'token' => $token], 200);
