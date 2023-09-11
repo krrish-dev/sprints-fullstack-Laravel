@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart; // Don't forget to import the Cart model
@@ -58,4 +59,14 @@ class UserController extends Controller
         $request->user()->tokens()->delete();
         return response(['message' => 'Logged out successfully'], 200);
     }
+
+
+    public function listUsers()
+    {
+        // Retrieve all users
+        $users = User::all();
+
+        return response()->json(['data' => $users], Response::HTTP_OK);
+    }
+
 }

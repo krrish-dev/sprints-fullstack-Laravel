@@ -109,7 +109,7 @@ class OrderController extends Controller
 //     return response()->json(['message' => 'Order placed successfully', 'order' => $order], Response::HTTP_CREATED);
 // }
 
-    public function listOrders()
+    public function myListOrders()
     {
         $user = auth()->user();
 
@@ -118,5 +118,54 @@ class OrderController extends Controller
 
         return response()->json(['data' => $orders], Response::HTTP_OK);
     }
+
+
+    public function viewAllOrders()
+{
+    // Retrieve all orders
+    $orders = Order::all();
+
+    return response()->json(['data' => $orders], Response::HTTP_OK);
+}
+
+
+public function getOrderById($orderId)
+{
+    // Find the order by its ID
+    $order = Order::find($orderId);
+
+    if (!$order) {
+        return response()->json(['message' => 'Order not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    return response()->json(['data' => $order], Response::HTTP_OK);
+}
+
+
+public function updateOrderStatus(Request $request, $orderId)
+{
+    // Find the order by its ID
+    $order = Order::find($orderId);
+
+    if (!$order) {
+        return response()->json(['message' => 'Order not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    // Validate the request
+    $validator = Validator::make($request->all(), [
+        'order_status' => 'required|string|max:255', // You can add any validation rules you need
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+    }
+
+    // Update the order status
+    $order->order_status = $request->input('order_status');
+    $order->save();
+
+    return response()->json(['message' => 'Order status updated successfully', 'data' => $order], Response::HTTP_OK);
+}
+
 }
 
