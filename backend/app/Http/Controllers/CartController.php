@@ -39,13 +39,14 @@ class CartController extends Controller
             // }
 
             // Add the product to the user's cart with the specified quantity
-            $quantity = $request->input('quantity');
+            // $request->input('quantity');
+            $quantity = 1 ;
             $user->cart->cartItems()->create([
                 'cart_id' => $user->cart->cart_id,
                 'product_id' => $product->product_id,
                 'product_name' => $product->name,
                 'product_price' => $product->price,
-                // 'product_quantity' => $quantity,
+                'product_quantity' => $quantity,
                 'product_subtotal' => $quantity * $product->price,
             ]);
 

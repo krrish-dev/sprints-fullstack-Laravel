@@ -46,10 +46,7 @@ class User extends Authenticatable
     /**
      * Define a one-to-one relationship with the Cart model.
      */
-    //     public function hasCart()
-    // {
-    //     return $this->cart !== null;
-    // }
+
     public function hasCart()
     {
         return $this->cart()->exists();
@@ -61,7 +58,7 @@ class User extends Authenticatable
     }
 
 
-
+    
 
     /**
      * Define a one-to-many relationship with the Order model.

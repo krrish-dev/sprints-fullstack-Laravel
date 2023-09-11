@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,6 @@ Route::middleware('auth:sanctum')->post('logout', [UserController::class, 'logou
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{productId}', [ProductController::class, 'getProductById']);
 
-
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     // Routes that require admin role
     Route::post('/products', [ProductController::class, 'store']);
@@ -51,7 +51,10 @@ Route::delete('/cart/empty', [CartController::class, 'emptyCart']);
 
  });
 
-
+ Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/place-order', [OrderController::class, 'createOrder']);
+    Route::get('/orders', [OrderController::class, 'listOrders']);
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
