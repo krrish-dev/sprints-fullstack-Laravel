@@ -90,6 +90,16 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product deleted successfully'], 204);
     }
 
+    public function getImage($imageName)
+{
+    $path = public_path('images/products/' . $imageName);
+
+    if (!file_exists($path)) {
+        return response()->json(['error' => 'Image not found'], 404);
+    }
+
+    return response()->file($path);
+}
 
 
 }

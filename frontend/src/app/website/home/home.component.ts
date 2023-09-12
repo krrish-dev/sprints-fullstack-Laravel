@@ -24,4 +24,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  getProductImageUrl(imageName: string): string {
+    return `http://localhost:8000/images/products/${imageName}`;
+  }
 }

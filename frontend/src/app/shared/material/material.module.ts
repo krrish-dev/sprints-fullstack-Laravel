@@ -19,12 +19,12 @@ import { MatCardModule } from '@angular/material/card';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
-    MatCardModule,
-    MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatCardModule,
+    MatGridListModule
    ],
   exports: [
     MatButtonModule,
@@ -37,7 +37,7 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
-    MatGridListModule,
+    MatGridListModule
     // Export the modules you want to use in other modules
   ],
 })

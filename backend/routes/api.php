@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->post('logout', [UserController::class, 'logou
 //routes for the ProductController
 // Allow unauthenticated access to list products
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/images/products/{imageName}', 'ProductController@getImage');
+
 Route::get('/products/{productId}', [ProductController::class, 'getProductById']);
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {

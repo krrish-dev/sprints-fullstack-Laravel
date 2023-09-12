@@ -11,6 +11,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './shared/material/material.module';
+import { WebsiteModule } from './website/website.module';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -20,11 +22,13 @@ import { MaterialModule } from './shared/material/material.module';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    WebsiteModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -1,10 +1,8 @@
-//
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service'; // Import the UserService
+import { UserService } from '../user.service'; // Import UserService
 
 @Component({
   selector: 'app-login',
@@ -18,7 +16,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private userService: UserService // Inject the UserService
+    private userService: UserService // Inject UserService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -26,7 +24,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Pre-fill the login form with registration data if available
+    const registrationData = this.userService.getUserData();
+    if (registrationData) {
+      this.loginForm.patchValue({
+        email: registrationData.email,
+        password: registrationData.password
+      });
+    }
+  }
 
   login() {
     const credentials = {
@@ -36,8 +43,8 @@ export class LoginComponent implements OnInit {
 
     this.http.post('http://localhost:8000/api/login', credentials).subscribe(
       (response: any) => {
-        this.userService.setUserData(response.user); // Update user data using the service
-        this.router.navigateByUrl('/'); // Navigate to home page
+        this.userService.setUserData(response.user);
+        this.router.navigateByUrl('/');
       },
       (error) => {
         console.error('Login error:', error);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root' // Angular will create a single instance of this service for the entire application
+  providedIn: 'root'
 })
 export class UserService {
   private userDataSubject = new BehaviorSubject<any>(null);
@@ -13,6 +13,11 @@ export class UserService {
   setUserData(userData: any) {
     localStorage.setItem('userData', JSON.stringify(userData));
     this.userDataSubject.next(userData);
+  }
+
+  getUserData(): any {
+    const userData = localStorage.getItem('userData');
+    return userData ? JSON.parse(userData) : null;
   }
 
   clearUserData() {

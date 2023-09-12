@@ -1,0 +1,33 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name" [(ngModel)]="formData.name" name="name" required>
+          <mat-error *ngIf="registerForm.controls['name'].hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Email" [(ngModel)]="formData.email" name="email" required email>
+          <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Invalid email address</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput type="password" placeholder="Password" [(ngModel)]="formData.password" name="password" required>
+          <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Password must be at least 8 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput type="password" placeholder="Confirm Password" [(ngModel)]="formData.password_confirmation" name="password_confirmation" required>
+          <mat-error *ngIf="registerForm.controls['password_confirmation'].hasError('required')">Confirmation is required</mat-error>
+          <mat-error *ngIf="formData.password_confirmation !== formData.password">Passwords do not match</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
