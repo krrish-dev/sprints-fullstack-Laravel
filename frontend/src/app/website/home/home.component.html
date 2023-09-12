@@ -1,0 +1,19 @@
+<p>home works!</p>
+ <!-- src/app/home/home.component.html -->
+<div class="product-grid">
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let product of products">
+      <mat-card class="product-card">
+        <img mat-card-image [src]="product.image_url" alt="{{ product.name }}" />
+        <mat-card-content>
+          <h3>{{ product.name }}</h3>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Add to Cart</button>
+          <button mat-raised-button color="accent">View Product</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

@@ -1,0 +1,39 @@
+// navbar.component.scss
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.mat-button-base {
+  color: white;
+
+  &:hover {
+    background-color: #007bff;
+  }
+}
+
+
+/* Add margin to the site name and buttons */
+span {
+  margin-right: 16px; // Adjust the margin as needed
+}
+
+button.mat-button {
+  margin-right: 5px; // Adjust the margin as needed
+  margin-left: 5px;  // Adjust the margin as needed
+}
+
+.mat-toolbar {
+  background-color: primary; /* Use your desired primary color */
+  justify-content: space-between; /* Align items to the left and right */
+  padding: 0 16px; /* Add some padding to the toolbar */
+}
+
+/* Style the spacer to create the desired spacing */
+.spacer {
+  flex: 1; /* Expand and push items to the right */
+}
+
+
+

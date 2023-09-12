@@ -1,0 +1,13 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+/* src/app/home/home.component.scss */
+.product-grid {
+  padding: 16px;
+}
+
+.product-card {
+  max-width: 300px;
+  margin: 16px;
+}
