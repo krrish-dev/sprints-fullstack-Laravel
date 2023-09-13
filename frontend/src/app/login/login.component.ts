@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8000/api/login', credentials).subscribe(
       (response: any) => {
         this.userService.setUserData(response.user);
+        
         this.router.navigateByUrl('/');
       },
       (error) => {

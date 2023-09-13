@@ -1,1 +1,5 @@
-<p>header works!</p>
+<!-- src/app/shared/components/header/header.component.html -->
+<div class="header-container">
+  <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (keydown.enter)="search()" />
+  <button (click)="search()">Search</button>
+</div>

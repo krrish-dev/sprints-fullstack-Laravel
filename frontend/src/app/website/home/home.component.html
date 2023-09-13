@@ -1,12 +1,13 @@
 <!-- src/app/home/home.component.html -->
+<app-header (searchQueryChanged)="handleSearch($event)"></app-header>
 <div class="product-grid">
   <mat-grid-list cols="3" rowHeight="2:1" gutterSize="16px">
-    <mat-grid-tile *ngFor="let product of products">
+    <mat-grid-tile *ngFor="let product of filteredProducts">
       <mat-card class="product-card">
         <img mat-card-image [src]="getProductImageUrl(product.image)" alt="{{ product.name }} Image" />
         <div class="product-info">
           <h3 class="product-name">{{ product.name }}</h3>
-          <p class="product-price">usd {{ product.price }}</p>
+          <p class="product-price">USD {{ product.price }}</p>
         </div>
         <div class="product-actions">
           <button mat-raised-button color="primary" class="add-to-cart-button">Add to Cart</button>
@@ -16,4 +17,3 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private userDataSubject = new BehaviorSubject<any>(null);
+  private userDataSubject = new BehaviorSubject<any>(this.getUserData()); // Initialize with local storage data
   userData$ = this.userDataSubject.asObservable();
 
   constructor() {}
@@ -13,6 +13,7 @@ export class UserService {
   setUserData(userData: any) {
     localStorage.setItem('userData', JSON.stringify(userData));
     this.userDataSubject.next(userData);
+    localStorage.setItem('isLoggedIn', 'true'); // Set isLoggedIn to true in localStorage
   }
 
   getUserData(): any {
@@ -23,5 +24,10 @@ export class UserService {
   clearUserData() {
     localStorage.removeItem('userData');
     this.userDataSubject.next(null);
+    localStorage.removeItem('isLoggedIn'); // Remove isLoggedIn from localStorage
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
   }
 }
