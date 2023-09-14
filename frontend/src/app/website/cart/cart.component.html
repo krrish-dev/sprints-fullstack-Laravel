@@ -1,1 +1,59 @@
-<p>cart works!</p>
+<!-- cart.component.html -->
+<div class="cart-container">
+  <div class="cart-items">
+    <mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+      <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{ item.product_name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{ item.product_price | currency:'USD':'symbol' }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <button mat-icon-button (click)="decreaseQuantity(item)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          {{ item.product_quantity }} <!-- Display current quantity -->
+          <button mat-icon-button (click)="increaseQuantity(item)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef> subTotal </mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{ item.product_price * item.product_quantity | currency:'USD':'symbol' }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <button mat-button (click)="removeItem(item)">Remove</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <div class="center-container">
+    <button class="cart-button" mat-raised-button color="warn" (click)="emptyCart()">Empty Cart</button>
+    <button class="cart-button" mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+  </div>
+  <div class="cart-summary">
+    <h2>Cart Summary</h2>
+    <ul>
+      <li *ngFor="let item of cartItems.data">{{ item.product_name }} x{{ item.product_quantity }}</li>
+
+    </ul>
+    <div class="total">
+      <p>Total: {{ calculateSubtotal() | currency:'USD':'symbol' }}</p>
+    </div>
+</div>
+</div>

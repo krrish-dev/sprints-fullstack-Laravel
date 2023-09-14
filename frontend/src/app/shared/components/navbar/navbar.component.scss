@@ -37,3 +37,15 @@ button.mat-button {
 
 
 
+/* navbar.component.scss */
+.cart-badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 1px 3px;
+  font-size: 12px;
+  position: relative;
+  top: -8px;
+  right: 68px;
+}
+

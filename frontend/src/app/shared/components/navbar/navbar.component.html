@@ -2,10 +2,16 @@
   <span>Art Gallery Store</span>
   <div class="spacer"></div>
   <button mat-button routerLink="/">Home</button>
-  <button mat-button routerLink="/products">Products</button>
-  <button mat-button routerLink="/cart">Cart</button>
-  <button mat-button routerLink="/checkout">Checkout</button>
+  <button mat-button routerLink="/cart">
+    <mat-icon>shopping_cart</mat-icon>
+    Cart
+    <span class="cart-badge" *ngIf="cartItemCount !== null && cartItemCount > 0">{{ cartItemCount }}</span>
+  </button>
+
+  <!-- <button mat-button routerLink="/products">Products</button>
+  <button mat-button routerLink="/checkout">Checkout</button> -->
   <div class="spacer"></div>
+
   <ng-container *ngIf="isLoggedIn; else loginButtons">
     <span>{{ getUserDisplayName() }}!</span>
     <button mat-button (click)="logout()">Logout</button>

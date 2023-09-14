@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -24,7 +25,8 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+
    ],
   exports: [
     MatButtonModule,

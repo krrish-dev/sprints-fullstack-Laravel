@@ -1,0 +1,63 @@
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../cart.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { CartItem , CartApiResponse } from '../../cart-item';
+
+@Component({
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
+})
+export class CartComponent implements OnInit {
+  displayedColumns: string[] = ['productName', 'price', 'quantity', 'total', 'actions'];
+  cartItems: MatTableDataSource<CartItem>; // Initialize as an empty MatTableDataSource
+  subtotal: number = 0;
+
+  constructor(private cartService: CartService) {
+    this.cartItems = new MatTableDataSource<CartItem>([]); // Initialize as an empty MatTableDataSource
+  }
+
+  // ngOnInit(): void {
+  //   this.cartService.getCartItems().subscribe((response: CartApiResponse) => {
+  //     console.log('Received items:', response.data);
+  //     this.cartItems.data = response.data; // Assign the data property to cartItems
+  //     this.calculateSubtotal();
+  //   });
+  // }
+
+  ngOnInit(): void {
+    this.cartService.getCartItems().subscribe((response: CartApiResponse) => {
+      console.log('Received items:', response.data);
+      this.cartItems.data = response.data; // Assign the data property to cartItems
+      this.calculateSubtotal();
+    });
+    // this.cartService.getCartItems().subscribe((response: CartApiResponse) => {
+    //   console.log('Received items:', response.data);
+    //   this.cartItems = new MatTableDataSource<CartItem>(response.data); // Create a new MatTableDataSource
+    //   this.calculateSubtotal();
+    // });
+  }
+
+
+  calculateSubtotal() {
+    if (this.cartItems) {
+      const subtotal = this.cartItems.data.reduce((total, item) => total + item.product_price * item.product_quantity, 0);
+      console.log('Subtotal:', subtotal);
+      return subtotal;
+    }
+    return 0; // Return 0 if cartItems is not defined or empty
+  }
+
+
+  decreaseQuantity(item: any) {
+    this.cartService.decreaseQuantity(item.id);
+  }
+
+  increaseQuantity(item: any) {
+    this.cartService.increaseQuantity(item.id);
+  }
+
+  removeItem(item: any) {
+    this.cartService.removeCartItem(item.id);
+  }
+}

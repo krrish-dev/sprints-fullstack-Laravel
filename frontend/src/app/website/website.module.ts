@@ -7,6 +7,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { HeaderComponent } from '../shared/components/header/header.component';
+ 
 
 
 
@@ -23,6 +24,7 @@ import { HeaderComponent } from '../shared/components/header/header.component';
     CommonModule,
     MaterialModule,
     FormsModule,
+
   ]
 })
 export class WebsiteModule { }

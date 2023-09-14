@@ -57,6 +57,7 @@ Route::delete('/cart/empty', [CartController::class, 'emptyCart']);
 
  });
 
+ //order apis
  Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/place-order', [OrderController::class, 'createOrder']);
     Route::get('/my-orders', [OrderController::class, 'myListOrders']);

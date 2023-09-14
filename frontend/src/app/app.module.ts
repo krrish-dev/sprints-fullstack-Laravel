@@ -34,7 +34,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [], // Provide CartService here
   bootstrap: [AppComponent]
 })
 export class AppModule { }
