@@ -7,6 +7,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { HeaderComponent } from '../shared/components/header/header.component';
+import { CartSummaryComponent } from './cart-summary/cart-summary.component';
  
 
 
@@ -18,7 +19,8 @@ import { HeaderComponent } from '../shared/components/header/header.component';
     HomeComponent,
     ProductDetailsComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CartSummaryComponent
   ],
   imports: [
     CommonModule,

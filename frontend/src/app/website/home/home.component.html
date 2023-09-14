@@ -11,7 +11,11 @@
         </div>
         <div class="product-actions">
           <button mat-raised-button color="primary" class="add-to-cart-button" (click)="addToCart(product.product_id)">Add to Cart</button>
-          <button mat-raised-button color="accent" class="view-product-button">View Product</button>
+          <button mat-raised-button color="accent" class="view-product-button"(click)="viewProduct(product.product_id)"
+>
+  View Product
+</button>
+
         </div>
       </mat-card>
     </mat-grid-tile>

@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './website/cart/cart.component'; // Import the CartComponent
 import { CheckoutComponent } from './website/checkout/checkout.component';
+import { ProductDetailsComponent } from './website/product-details/product-details.component';
 
 
 
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-
+  { path: 'product/:id', component: ProductDetailsComponent},
 
 
 ];

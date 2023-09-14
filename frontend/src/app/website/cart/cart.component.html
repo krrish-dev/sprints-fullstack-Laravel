@@ -46,7 +46,7 @@
     <button class="cart-button" mat-raised-button color="warn" (click)="emptyCart()">Empty Cart</button>
     <button class="cart-button" mat-raised-button color="primary" (click)="checkout()">Checkout</button>
   </div>
-  <div class="cart-summary">
+  <!-- <div class="cart-summary">
     <h2>Cart Summary</h2>
     <ul>
       <li *ngFor="let item of cartItems.data">{{ item.product_name }} x{{ item.product_quantity }}</li>
@@ -55,5 +55,10 @@
     <div class="total">
       <p>Total: {{ calculateSubtotal() | currency:'USD':'symbol' }}</p>
     </div>
-</div>
+        </div> -->
+        <!-- cart.component.html -->
+<!-- ...existing code... -->
+<app-cart-summary [cartItems]="cartItems.data" [total]="calculateSubtotal()"></app-cart-summary>
+<!-- ...existing code... -->
+
 </div>

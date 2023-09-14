@@ -1,0 +1,10 @@
+<!-- cart-summary.component.html -->
+<div class="cart-summary">
+  <h2>Cart Summary</h2>
+  <ul>
+    <li *ngFor="let item of cartItems">{{ item.product_name }} x{{ item.product_quantity }}</li>
+  </ul>
+  <div class="total">
+    <p>Total: {{ total | currency:'USD':'symbol' }}</p>
+  </div>
+</div>

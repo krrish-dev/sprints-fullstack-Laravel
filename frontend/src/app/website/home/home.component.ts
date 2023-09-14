@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../cart.service'; // Import the CartService
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   filteredProducts: any[] = []; // Array to store filtered products
   searchQuery: string = ''; // Initialize search query
 
-  constructor(private http: HttpClient, private cartService: CartService) {} // Inject the CartService
+  constructor(private http: HttpClient, private cartService: CartService ,  private router: Router) {} // Inject the CartService
 
   ngOnInit() {
     // Fetch product data from your API
@@ -27,6 +27,13 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+
+      viewProduct(productId: number) {
+        // Navigate to the product details route with the product ID as a parameter
+        this.router.navigate(['/product', productId]);
+      }
+
 
   getProductImageUrl(imageName: string): string {
     return `http://localhost:8000/images/products/${imageName}`;

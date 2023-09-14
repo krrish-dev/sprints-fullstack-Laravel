@@ -1,0 +1,28 @@
+/* cart-summary.component.scss */
+
+.cart-summary {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  font-size: 16px;
+}
+
+.cart-summary h2 {
+  color: #333;
+  font-weight: bold;
+}
+
+.cart-summary ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-summary li {
+  margin: 5px 0;
+}
+
+.cart-summary .total {
+  margin-top: 10px;
+  font-weight: bold;
+}

@@ -1,2 +1,14 @@
-<p>product-details works!</p>
-
+<mat-card class="product-card">
+  <!-- <img mat-card-image [src]="product.image" alt="{{ product.name }} Image" /> -->
+  <img mat-card-image [src]="getProductImageUrl(product.image)" alt="{{ product.name }} Image" />
+  <div class="product-info">
+    <h1 class="product-name">{{ product.name }}</h1>
+    <p class="product-description">{{ product.description }}</p>
+    <p class="product-price">Price: USD {{ product.price }}</p>
+    <p class="product-stock">In Stock: {{ product.stock }}</p>
+    <p class="product-category">Category: {{ product.category }}</p>
+    <p class="product-status">Status: {{ product.status }}</p>
+  </div>
+  <button mat-raised-button color="primary" (click)="addToCart(product.product_id)">Add to Cart</button>
+    <button mat-raised-button color="accent" (click)="navigateBack()">Back to Home</button>
+</mat-card>
