@@ -8,7 +8,9 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 import { EditProductDialogComponent } from './edit-product-dialog/edit-product-dialog.component';
 import { FormsModule } from '@angular/forms';
-
+import { OrderDetailsDialogComponent } from './orders/order-details-dialog/order-details-dialog.component';
+import { UpdateOrderStatusDialogComponent } from './orders/update-order-status-dialog/update-order-status-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -17,13 +19,16 @@ import { FormsModule } from '@angular/forms';
     OrdersComponent,
     CustomersComponent,
     AddProductDialogComponent,
-    EditProductDialogComponent
+    EditProductDialogComponent,
+    OrderDetailsDialogComponent,
+    UpdateOrderStatusDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     AdminRoutingModule,
-    FormsModule, 
+    FormsModule,
+    MatDividerModule,
   ]
 })
 export class AdminModule { }

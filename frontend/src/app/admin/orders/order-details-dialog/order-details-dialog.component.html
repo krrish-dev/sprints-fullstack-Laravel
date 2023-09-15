@@ -1,0 +1,28 @@
+<h2>Order Details</h2>
+<mat-divider></mat-divider>
+
+<p><strong>Order Number:</strong> {{ data.order_number }}</p>
+<p><strong>Customer Name:</strong> {{ data.customer_name }}</p>
+<p><strong>Customer Email:</strong> {{ data.customer_email }}</p>
+<p><strong>Customer Phone:</strong> {{ data.customer_phone }}</p>
+<p><strong>Customer Address:</strong> {{ data.customer_address }}</p>
+<p><strong>Order Date:</strong> {{ data.order_date }}</p>
+<p><strong>Order Total:</strong> {{ data.order_total }}</p>
+
+<h3>Order Items</h3>
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    <th>Product Quantity</th>
+    <th>Product Subtotal</th>
+  </tr>
+  <tr *ngFor="let item of data.order_items">
+    <td>{{ item.product_name }}</td>
+    <td>{{ item.product_price }}</td>
+    <td>{{ item.product_quantity }}</td>
+    <td>{{ item.product_subtotal }}</td>
+  </tr>
+</table>
+
+<button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
