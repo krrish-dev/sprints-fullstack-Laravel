@@ -14,12 +14,14 @@ export class UserService {
     localStorage.setItem('userData', JSON.stringify(userData));
     this.userDataSubject.next(userData);
     localStorage.setItem('isLoggedIn', 'true'); // Set isLoggedIn to true in localStorage
+    
   }
 
   getUserData(): any {
     const userData = localStorage.getItem('userData');
     return userData ? JSON.parse(userData) : null;
   }
+
 
   clearUserData() {
     localStorage.removeItem('userData');

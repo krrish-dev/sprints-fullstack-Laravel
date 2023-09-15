@@ -53,6 +53,9 @@ class UserController extends Controller
         return response(['user' => $user, 'token' => $token], 200);
     }
 
+
+
+
     // User logout
     public function logout(Request $request)
     {
@@ -60,7 +63,13 @@ class UserController extends Controller
         return response(['message' => 'Logged out successfully'], 200);
     }
 
-
+    public function adminPanel()
+    {
+        return response()->json([
+            'message' => 'Welcome to the Admin Panel!',
+            'status_code' => 200,
+        ]);
+    }
     public function listUsers()
     {
         // Retrieve all users

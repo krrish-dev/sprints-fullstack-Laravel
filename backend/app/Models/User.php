@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
+        public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 
     /**
      * Define a one-to-one relationship with the Cart model.
@@ -58,7 +63,7 @@ class User extends Authenticatable
     }
 
 
-    
+
 
     /**
      * Define a one-to-many relationship with the Order model.

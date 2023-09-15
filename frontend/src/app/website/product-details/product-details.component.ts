@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
 
 
   navigateBack() {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   getProductImageUrl(imageName: string): string {

@@ -1,5 +1,4 @@
-<mat-card class="product-card">
-  <!-- <img mat-card-image [src]="product.image" alt="{{ product.name }} Image" /> -->
+<mat-card class="product-card" *ngIf="product"> 
   <img mat-card-image [src]="getProductImageUrl(product.image)" alt="{{ product.name }} Image" />
   <div class="product-info">
     <h1 class="product-name">{{ product.name }}</h1>
@@ -10,5 +9,5 @@
     <p class="product-status">Status: {{ product.status }}</p>
   </div>
   <button mat-raised-button color="primary" (click)="addToCart(product.product_id)">Add to Cart</button>
-    <button mat-raised-button color="accent" (click)="navigateBack()">Back to Home</button>
+  <button mat-raised-button color="accent" (click)="navigateBack()">Back to Home</button>
 </mat-card>

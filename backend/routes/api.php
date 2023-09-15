@@ -34,6 +34,7 @@ Route::get('/products/{productId}', [ProductController::class, 'getProductById']
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     // Routes that require admin role
+    Route::any('/admin-panel' , [UserController::class, 'adminPanel']);
     Route::get('/users', [UserController::class, 'listUsers']);
     Route::post('/products', [ProductController::class, 'store']);
     Route::put('/products/{id}', [ProductController::class, 'update']);

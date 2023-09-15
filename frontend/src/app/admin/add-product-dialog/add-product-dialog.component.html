@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Add Product</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="product.name" name="name" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" [(ngModel)]="product.description" name="description" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Price" [(ngModel)]="product.price" name="price" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Stock" [(ngModel)]="product.stock" name="stock" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Image URL" [(ngModel)]="product.image" name="image" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Category" [(ngModel)]="product.category" name="category" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Status" [(ngModel)]="product.status" name="status" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSubmit()">Add</button>
+</div>

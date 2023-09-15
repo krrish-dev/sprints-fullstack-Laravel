@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './shared/material/material.module';
 import { WebsiteModule } from './website/website.module';
 import { RegisterComponent } from './register/register.component';
+import { AdminModule } from './admin/admin.module';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdminRoutingModule,
+    AdminModule ,
     MaterialModule,
     WebsiteModule,
     HttpClientModule,
