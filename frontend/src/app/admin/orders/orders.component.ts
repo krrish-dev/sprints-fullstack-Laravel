@@ -24,20 +24,45 @@ export class OrdersComponent implements OnInit {
 
 
   orders: any[] = []; // Initialize as an empty array
+  searchQuery: string = '';
+  originalOrders: any[] = []; // Store the original orders array
 
   constructor(private orderService: OrderService, private dialog: MatDialog) {}
+
 
   ngOnInit(): void {
     this.fetchOrders();
   }
 
-
   fetchOrders() {
     // Call OrderService to get the list of orders from your API
     this.orderService.getOrders().subscribe((response: any) => {
       this.orders = response.data; // Update with the array of orders
+      this.originalOrders = [...this.orders]; // Store a copy of the original orders
     });
   }
+
+  filterOrders() {
+    // Create a copy of the original orders array
+    let filteredOrders = [...this.originalOrders];
+
+    if (this.searchQuery) {
+      // Filter the orders based on the search query
+      filteredOrders = filteredOrders.filter((order) =>
+        order.order_number.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+
+    // Update the orders array with the filtered results
+    this.orders = filteredOrders;
+  }
+
+  clearSearch() {
+    this.searchQuery = ''; // Clear the search query
+    this.filterOrders(); // Filter with an empty query to restore the original orders
+  }
+
+
 
 
   viewOrderDetails(order: any) {

@@ -1,4 +1,20 @@
 <h2>Order Management</h2>
+
+<!-- Add a search input field -->
+<div class="search-bar">
+  <input
+    type="text"
+    matInput
+    placeholder="Search by Order Number"
+    [(ngModel)]="searchQuery"
+    (input)="filterOrders()"
+  />
+  <button mat-icon-button (click)="clearSearch()" aria-label="Clear">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+
 <table mat-table [dataSource]="orders">
   <!-- Displayed Columns -->
   <ng-container *ngFor="let column of displayedColumns; let last = last" [matColumnDef]="column">
