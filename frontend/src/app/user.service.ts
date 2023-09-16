@@ -13,8 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-
-
   setUserData(userData: any) {
     localStorage.setItem('userData', JSON.stringify(userData));
     this.userDataSubject.next(userData);
@@ -36,7 +34,9 @@ export class UserService {
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  //  console.log('Is Authenticated:', isLoggedIn);
+    return isLoggedIn;
   }
 
   getUsers() {
@@ -45,23 +45,24 @@ export class UserService {
 
     // Set up the headers with the token
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`, // Add the token to the Authorization header
+      Authorization: `Bearer ${token}`, // Add the token to the Authorization header
     });
 
     // Include the headers in the request
     return this.http.get<any>(this.apiUrl, { headers });
   }
 
-
   // Check if the user is authenticated
   isAuthenticated(): boolean {
-    return this.authenticated; // Use the authenticated flag
+    console.log('Is Authenticated:', this.isLoggedIn());
+    return this.isLoggedIn(); // Use the authenticated flag
   }
 
-
-    // Check if the user has the 'admin' role
-    isAdmin(): boolean {
-      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-      return userData && userData.role === 'admin';
-    }
+  // Check if the user has the 'admin' role
+  isAdmin(): boolean {
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    const isAdmin = userData && userData.role === 'admin';
+    console.log('Is Admin:', isAdmin);
+    return isAdmin;
+  }
 }
