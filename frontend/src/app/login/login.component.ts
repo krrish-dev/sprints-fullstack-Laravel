@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service'; // Import UserService
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private snackBar: MatSnackBar,
     private userService: UserService // Inject UserService
   ) {
     this.loginForm = this.fb.group({
@@ -44,13 +46,15 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:8000/api/login', credentials).subscribe(
       (response: any) => {
         this.userService.setUserData(response.user);
-        // Save the token in localStorage
         localStorage.setItem('token', response.token);
 
         this.router.navigateByUrl('/');
       },
       (error) => {
         console.error('Login error:', error);
+        this.snackBar.open('Invalid email or password. Please try again.', 'Close', {
+          duration: 5000
+        });
       }
     );
   }
