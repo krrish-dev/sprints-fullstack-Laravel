@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    My Profile
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ user.name }}</h5>
+    <p class="card-text">UserID: {{ user.id }}</p>
+    <p class="card-text">Email: {{ user.email }}</p>
+    <p class="card-text">Role: {{ user.role || 'N/A' }}</p>
+    <p class="card-text">Phone: {{ user.phone || 'N/A' }}</p>
+    <p class="card-text">address: {{ user.address || 'N/A' }}</p>
+    <p class="card-text">Registered at: {{ user.created_at | date: 'dd/M/yyyy' || 'N/A' }}</p>
+    <!-- Add more user data as needed -->
+  </div>
+</div>
+

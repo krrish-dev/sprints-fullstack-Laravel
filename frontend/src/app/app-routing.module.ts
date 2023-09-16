@@ -8,6 +8,7 @@ import { CheckoutComponent } from './website/checkout/checkout.component';
 import { ProductDetailsComponent } from './website/product-details/product-details.component';
 import { MyOrdersComponent } from './website/my-orders/my-orders.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MyProfileComponent } from './website/my-profile/my-profile.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'product/:id', component: ProductDetailsComponent},
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard] },
 
   {
     path: 'admin',

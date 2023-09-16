@@ -1,0 +1,37 @@
+.card {
+  max-width: 400px; /* Set the maximum width of the card */
+  margin: 20px auto; /* Center the card horizontally and add margin top/bottom */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff; /* Set background color */
+}
+
+
+.card-header {
+  background-color: #007bff; /* Header background color */
+  color: #fff; /* Header text color */
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+.card-body {
+  padding: 20px 15px; /* Add padding to the top and bottom (20px) and left/right (15px) */
+}
+
+.card-title {
+  font-size: 24px; /* Title font size */
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 16px; /* Text font size */
+}
+
+/* Center the card vertically */
+.center-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust this value to control the card's vertical position */
+}

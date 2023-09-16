@@ -17,7 +17,9 @@
       Cart
       <span class="cart-badge" *ngIf="cartItemCount !== null && cartItemCount > 0">{{ cartItemCount }}</span>
     </button>
-
+    <button mat-button routerLink="/my-profile" *ngIf="authUser && !hideCartAndOrdersButtons">
+      My profile
+    </button>
     <!-- My Orders Button: Show only for authenticated users -->
     <button mat-button routerLink="/my-orders" *ngIf="authUser && !hideCartAndOrdersButtons">
       My Orders
