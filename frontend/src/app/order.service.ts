@@ -22,6 +22,34 @@ export class OrderService {
     return headers;
   }
 
+
+  getMyOrders(): Observable<any[]> {
+    // Get the user token from local storage or your authentication service
+    const token = localStorage.getItem('token'); // Replace with your authentication logic
+
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Add the token to the Authorization header
+    });
+
+    // Assuming the API endpoint for fetching user-specific orders is http://localhost:8000/api/my-orders
+    const myOrdersUrl = 'http://localhost:8000/api/my-orders';
+
+    // Include the headers in the request
+    const observable = this.http.get<any[]>(myOrdersUrl, { headers });
+
+    // Log the data before returning it
+    observable.subscribe((data) => {
+      console.log('My Orders data:', data);
+    });
+
+    return observable;
+  }
+
+
+
+
+
   getOrders(): Observable<any[]> {
     // Include the headers in the request
     const headers = this.getHeadersWithToken();

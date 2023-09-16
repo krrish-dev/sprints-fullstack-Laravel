@@ -1,0 +1,36 @@
+<h2>My Orders</h2>
+
+<table mat-table [dataSource]="orders">
+  <!-- Displayed Columns -->
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+    <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+    <td mat-cell *matCellDef="let order">
+      <!-- Display order_items as formatted string -->
+      <ng-container *ngIf="column === 'order_items'">
+        <span *ngIf="order.order_items && order.order_items.length > 0">
+          <span *ngFor="let item of order.order_items; let lastItem = last">
+            {{ item.product_name }} (Qty: {{ item.product_quantity }}, Price: {{ item.product_price | currency }})
+            <!-- Add a comma and space if it's not the last item -->
+            <span *ngIf="!lastItem">, </span>
+          </span>
+        </span>
+        <span *ngIf="!(order.order_items && order.order_items.length > 0)">No items</span>
+      </ng-container>
+      <!-- Display other columns directly -->
+      <ng-container *ngIf="column !== 'order_items'">
+        {{ order[column] }}
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!-- Header Row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <!-- Data Rows -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+</table>
+
+<!-- Display a message if there are no orders -->
+<div *ngIf="!orders || orders.length === 0">
+  You don't have any orders yet.
+</div>

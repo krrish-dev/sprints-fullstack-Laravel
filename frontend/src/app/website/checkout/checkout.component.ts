@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CartService } from '../../cart.service';
 import { CartItem, CartApiResponse } from '../../cart-item';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Step 1
 
 @Component({
   selector: 'app-checkout',
@@ -10,76 +10,64 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
-  cartItems: CartItem[] = []; // Use the appropriate type for cart items
+  cartItems: CartItem[] = [];
   customerName = '';
   customerEmail = '';
   customerPhone = '';
   customerAddress = '';
+  orderPlaced = false; // Step 2: Initialize to false
 
   constructor(
     private http: HttpClient,
     private cartService: CartService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router // Step 1
   ) {}
 
   ngOnInit(): void {
-    // Fetch cart items from the CartService
     this.cartService.getCartItems().subscribe((response: CartApiResponse) => {
       console.log('Received initial items:', response.data);
-      this.cartItems = response.data; // Assign cart items to the cartItems property
+      this.cartItems = response.data;
       this.calculateSubtotal();
-      // Manually trigger change detection
       this.cdr.detectChanges();
     });
   }
 
   calculateSubtotal(): number {
     let subtotal = 0;
-
-    // Calculate the subtotal based on cart items
     for (const item of this.cartItems) {
       subtotal += item.product_price * item.product_quantity;
     }
-
     return subtotal;
   }
 
-  // Rest of your CheckoutComponent code...
-
   placeOrder() {
-    // Prepare the data to send to the API
     const orderData = {
       customer_name: this.customerName,
       customer_email: this.customerEmail,
       customer_phone: this.customerPhone,
       customer_address: this.customerAddress,
-      // Include any other relevant data such as cart items
     };
 
-    // Retrieve the token from local storage
     const token = localStorage.getItem('token');
-
-    // Create HttpHeaders with the token
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
 
-    // Send a POST request to the API with the headers
     this.http
       .post('http://localhost:8000/api/place-order', orderData, { headers })
       .subscribe(
         (response) => {
-          // Handle success response
           console.log('Order placed successfully:', response);
+          this.orderPlaced = true; // Step 4: Order placed successfully
           // Optionally, clear the cart or perform other actions upon success
+          // Step 5: Redirect to "My Orders" page
+          this.router.navigate(['/my-orders']);
         },
         (error) => {
-          // Handle error response
           console.error('Error placing order:', error);
         }
       );
   }
 }
-

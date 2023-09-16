@@ -1,38 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class UserService {
-//   private userDataSubject = new BehaviorSubject<any>(this.getUserData()); // Initialize with local storage data
-//   userData$ = this.userDataSubject.asObservable();
-
-//   constructor() {}
-
-//   setUserData(userData: any) {
-//     localStorage.setItem('userData', JSON.stringify(userData));
-//     this.userDataSubject.next(userData);
-//     localStorage.setItem('isLoggedIn', 'true'); // Set isLoggedIn to true in localStorage
-
-//   }
-
-//   getUserData(): any {
-//     const userData = localStorage.getItem('userData');
-//     return userData ? JSON.parse(userData) : null;
-//   }
-
-
-//   clearUserData() {
-//     localStorage.removeItem('userData');
-//     this.userDataSubject.next(null);
-//     localStorage.removeItem('isLoggedIn'); // Remove isLoggedIn from localStorage
-//   }
-
-//   isLoggedIn(): boolean {
-//     return localStorage.getItem('isLoggedIn') === 'true';
-//   }
-// }
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpHeaders
@@ -43,15 +8,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpHe
 export class UserService {
   private userDataSubject = new BehaviorSubject<any>(this.getUserData());
   userData$ = this.userDataSubject.asObservable();
-
+  private authenticated = false;
   private apiUrl = 'http://localhost:8000/api/users';
 
   constructor(private http: HttpClient) {}
+
+
 
   setUserData(userData: any) {
     localStorage.setItem('userData', JSON.stringify(userData));
     this.userDataSubject.next(userData);
     localStorage.setItem('isLoggedIn', 'true');
+    this.authenticated = true; // Set authenticated to true when setting user data
   }
 
   getUserData(): any {
@@ -61,8 +29,10 @@ export class UserService {
 
   clearUserData() {
     localStorage.removeItem('userData');
+    localStorage.removeItem('token');
     this.userDataSubject.next(null);
     localStorage.removeItem('isLoggedIn');
+    this.authenticated = false; // Set authenticated to false when clearing user data
   }
 
   isLoggedIn(): boolean {
@@ -81,4 +51,17 @@ export class UserService {
     // Include the headers in the request
     return this.http.get<any>(this.apiUrl, { headers });
   }
+
+
+  // Check if the user is authenticated
+  isAuthenticated(): boolean {
+    return this.authenticated; // Use the authenticated flag
+  }
+
+
+    // Check if the user has the 'admin' role
+    isAdmin(): boolean {
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      return userData && userData.role === 'admin';
+    }
 }

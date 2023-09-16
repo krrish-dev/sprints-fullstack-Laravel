@@ -8,6 +8,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { HeaderComponent } from '../shared/components/header/header.component';
 import { CartSummaryComponent } from './cart-summary/cart-summary.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
  
 
 
@@ -20,7 +21,8 @@ import { CartSummaryComponent } from './cart-summary/cart-summary.component';
     ProductDetailsComponent,
     CartComponent,
     CheckoutComponent,
-    CartSummaryComponent
+    CartSummaryComponent,
+    MyOrdersComponent
   ],
   imports: [
     CommonModule,

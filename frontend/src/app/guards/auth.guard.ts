@@ -1,5 +1,3 @@
-// auth.guard.ts
-
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { UserService } from '../user.service';
@@ -11,11 +9,17 @@ export class AuthGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.userService.isLoggedIn()) {
-      return true; // User is authenticated, allow access
-    } else {
-      this.router.navigate(['/login']); // Redirect to login page if not authenticated
+    if (localStorage.getItem('token')) {
+      // Token is present, consider user as authenticated
+      return true;
+    } else if (!this.userService.isAuthenticated()) {
+      // If UserService isAuthenticated method also returns false (no UserData)
+      // Redirect to login page or handle unauthorized access
+      this.router.navigate(['/login']);
       return false;
     }
+
+    // User is authenticated according to UserService
+    return true;
   }
 }

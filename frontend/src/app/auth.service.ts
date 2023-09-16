@@ -10,11 +10,14 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   isAdminSubject = new BehaviorSubject<boolean>(false);
   isAdmin$ = this.isAdminSubject.asObservable();
-
+  private authenticated = false;
   constructor(private http: HttpClient) {
     this.checkAdminRole();
   }
 
+  isAuthenticated(): boolean {
+    return this.authenticated;
+  }
   checkAdminRole() {
     const token = localStorage.getItem('token');
 
