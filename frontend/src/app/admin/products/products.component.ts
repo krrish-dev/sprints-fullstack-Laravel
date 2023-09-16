@@ -10,7 +10,7 @@ import { EditProductDialogComponent } from '../edit-product-dialog/edit-product-
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  columns: string[] = ['name', 'description', 'price', 'stock', 'actions']; // Define the columns for your MatTable
+  columns: string[] = ['name', 'image', 'description', 'category' , 'price', 'stock', 'actions']; // Define the columns for your MatTable
   products: any[] = []; // Initialize with an empty array or fetch products from the API
 
   constructor(private productService: ProductService, private dialog: MatDialog) {}
@@ -25,6 +25,10 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
     });
+  }
+
+  getImageUrl(imageName: string): string {
+    return `http://localhost:8000/images/products/${imageName}`;
   }
 
   addProduct() {
