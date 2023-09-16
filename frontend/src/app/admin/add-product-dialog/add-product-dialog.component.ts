@@ -7,7 +7,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './add-product-dialog.component.html',
 })
 export class AddProductDialogComponent {
-  product: any = {}; // Initialize an empty product object
+  product: any = {
+    image: 'Artwork1.jpg'
+
+  }; // Initialize an empty product object
 
   constructor(
     public dialogRef: MatDialogRef<AddProductDialogComponent>,
